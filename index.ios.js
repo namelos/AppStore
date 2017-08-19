@@ -6,6 +6,9 @@
 
 import React from 'react';
 import { AppRegistry } from 'react-native'
-import { AppStore } from './common/AppStore'
+import { AppStore, registerApp } from './common/AppStore'
+
+import { App1 } from './common/App1'
+registerApp('app1', App1)
 
 AppRegistry.registerComponent('AppStore', () => AppStore);

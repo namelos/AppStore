@@ -4,13 +4,10 @@ import { View, Text, StyleSheet } from 'react-native'
 import { NativeRouter, Link, Route } from 'react-router-native'
 
 const Home = () => <Text>Welcome to AppStore.</Text>
-const App1 = () => <Text>This is App1, a sub-project.</Text>
 
 const apps = {}
 
 export const registerApp = (name, comp) => apps[name] = comp
-
-registerApp('app1', App1)
 
 export const AppStore = () => <NativeRouter>
   <View style={styles.center}>
