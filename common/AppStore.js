@@ -8,6 +8,7 @@ const Home = () => <Text>Welcome to AppStore.</Text>
 const apps = {}
 
 export const registerApp = (name, comp) => apps[name] = comp
+global.registerApp = registerApp
 
 export const AppStore = () => <NativeRouter>
   <View style={styles.center}>
