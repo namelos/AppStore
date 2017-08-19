@@ -6,9 +6,11 @@ import { NativeRouter, Link, Route } from 'react-router-native'
 const Home = () => <Text>Welcome to AppStore.</Text>
 const App1 = () => <Text>This is App1, a sub-project.</Text>
 
-const apps = {
-  '/app1': App1
-}
+const apps = {}
+
+export const registerApp = (name, comp) => apps[name] = comp
+
+registerApp('app1', App1)
 
 export const AppStore = () => <NativeRouter>
   <View style={styles.center}>
@@ -16,15 +18,16 @@ export const AppStore = () => <NativeRouter>
       <Link to="/">
         <Text>Home</Text>
       </Link>
-      <Link to="/app1">
-        <Text>App1</Text>
-      </Link>
+      { Object.keys(apps).map(app =>
+        <Link to={`/${app}`} key={app}>
+          <Text>{app}</Text>
+        </Link>) }
     </View>
 
     <View>
       <Route exact path="/" component={Home}/>
-      { Object.keys(apps).map(key =>
-        <Route path={key} component={apps[key]} key={key}/>) }
+      { Object.keys(apps).map(app =>
+        <Route path={`/${app}`} component={apps[app]} key={app}/>) }
     </View>
   </View>
 </NativeRouter>
