@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { NativeRouter, Link, Route } from 'react-router-native'
-import appRegister from '../services/app-register'
+import nestedAppProvider from '../services/nested-app-provider'
 import { Home } from './Home'
 
 export class AppStore extends React.Component {
@@ -10,7 +10,7 @@ export class AppStore extends React.Component {
   }
 
   async componentWillMount() {
-    const apps = await appRegister.getAll()
+    const apps = await nestedAppProvider.getAll()
     this.setState({apps})
   }
 
@@ -34,8 +34,8 @@ export class AppStore extends React.Component {
           <View>
             <Route exact path="/" component={Home}/>
             {
-              this.state.apps.map(({name, nodeFactory}) =>
-                <Route path={`/${name}`} component={nodeFactory} key={name}/> 
+              this.state.apps.map(({name, appRoot}) =>
+                <Route path={`/${name}`} component={appRoot} key={name}/> 
               )
             }
           </View>

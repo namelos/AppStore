@@ -11,7 +11,7 @@ export default {
 		return bundles
 			.map(({name, js}) => ({
 				name: name,
-				nodeFactory: () => eval(js)(React, Text)
+				appRoot: () => eval(js)(React, Text)
 			}))
 	}
 }
