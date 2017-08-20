@@ -1,6 +1,6 @@
 import jsBundleProvider from './js-bundle-provider'
 import React from 'react'
-import { Text } from 'react-native'
+import ReactNative from 'react-native'
 
 const apps = []
 
@@ -11,7 +11,7 @@ export default {
 		return bundles
 			.map(({name, js}) => ({
 				name: name,
-				appRoot: () => eval(js)(React, Text)
+				appRoot: () => eval(js)({ React, ReactNative })
 			}))
 	}
 }
