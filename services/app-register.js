@@ -1,16 +1,17 @@
-import FileCache from 'react-native-filecache'
+import jsBundleProvider from './js-bundle-provider'
+import React from 'react'
+import { Text } from 'react-native'
 
-const App1 = require('../files/App1').App1
-
-const apps = {
-	App1
-}
+const apps = []
 
 export default {
 	async getAll() {
-		return Object.keys(apps).map(name => ({
-			name: name,
-			nodeFactory: apps[name],
-		}))
+		const bundles = await jsBundleProvider.getAll()
+
+		return bundles
+			.map(({name, js}) => ({
+				name: name,
+				nodeFactory: () => eval(js)(React, Text)
+			}))
 	}
 }
