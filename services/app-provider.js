@@ -1,17 +1,13 @@
-import jsBundleProvider from './js-bundle-provider'
 import React from 'react'
-import ReactNative from 'react-native'
-
-const apps = []
+import Apps from './app-registry'
+import AppContainer from './AppContainer'
 
 export default {
 	async getAll() {
-		const bundles = await jsBundleProvider.getAll()
-
-		return bundles
-			.map(({name, js}) => ({
+		return Apps
+			.map(({name, uri}) => ({
 				name: name,
-				appRoot: () => eval(js)({ React, ReactNative })
+				appRoot: () => <AppContainer uri={uri} />
 			}))
 	}
 }
