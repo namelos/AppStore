@@ -1,4 +1,8 @@
-const apps = {}
+const App1 = require('../files/App1').App1
+
+const apps = {
+	App1
+}
 
 export default {
 	register(name, comp) {
