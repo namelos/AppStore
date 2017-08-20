@@ -2,8 +2,7 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { NativeRouter, Link, Route } from 'react-router-native'
 import appRegister from '../services/app-register'
-
-const Home = () => <Text>Welcome to AppStore.</Text>
+import { Home } from './Home'
 
 export const AppStore = () => <NativeRouter>
   <View style={styles.center}>
