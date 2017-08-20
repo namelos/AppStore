@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { NativeRouter, Link, Route } from 'react-router-native'
-import nestedAppProvider from '../services/nested-app-provider'
+import appProvider from '../services/app-provider'
 import { Home } from './Home'
 
 export class AppStore extends React.Component {
@@ -10,7 +10,7 @@ export class AppStore extends React.Component {
   }
 
   async componentWillMount() {
-    const apps = await nestedAppProvider.getAll()
+    const apps = await appProvider.getAll()
     this.setState({apps})
   }
 
