@@ -9,5 +9,3 @@ import { AppRegistry } from 'react-native'
 import { AppStore } from './common/AppStore'
 
 AppRegistry.registerComponent('AppStore', () => AppStore);
-
-import './common/App1'
