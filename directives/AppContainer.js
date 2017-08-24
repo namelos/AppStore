@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactNative from 'react-native'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
-import jsBundleProvider from '../services/js-bundle-provider'
+import jsBundleCache from '../services/js-bundle-cache'
 
 export default class AppContainer extends React.Component {
 	state = {
@@ -14,7 +14,7 @@ export default class AppContainer extends React.Component {
 	}
 
 	async _downloadAndRunBundle() {
-		const js = await jsBundleProvider.getByUri(this.uri)
+		const js = await jsBundleCache.fetch(this.uri)
 		const appRoot = eval(js)({ React, ReactNative })
 		this.setState({
 			App: () => appRoot
