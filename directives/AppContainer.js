@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactNative from 'react-native'
 import { View } from 'react-native'
-import jsBundleProvider from './js-bundle-provider'
+import jsBundleProvider from '../services/js-bundle-provider'
 
 export default class AppContainer extends React.Component {
 	state = {

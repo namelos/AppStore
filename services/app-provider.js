@@ -1,6 +1,6 @@
 import React from 'react'
 import Apps from './app-registry'
-import AppContainer from './AppContainer'
+import AppContainer from '../directives/AppContainer'
 
 export default {
 	async getAll() {
