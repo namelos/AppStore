@@ -5,19 +5,32 @@ const client = RNFetchBlob.config({fileCache: true})
 
 export default {
   async fetch(uri) {
-    if(await this.isCached(uri)) {
-      return _readBundle(await _getBundlePath(uri))
+    const cached = await this._tryReadFromCache(uri)
+    if(cached) {
+      return cached
     }
+    return this._downloadAndRead(uri)
+  },
+  async _tryReadFromCache(uri) {
+    const path = await _getBundlePath(uri)
+    try {
+      return _readBundle(path)
+    } catch(e) {}
+  },
+  async _downloadAndRead(uri) {
     const res = await client.fetch('GET', uri)
-    await _saveBundlePath(uri, res.path())
-    return _readBundle(res.path())
+    const path = res.path()
+    await _saveBundlePath(uri, path)
+    return _readBundle(path)
   },
   async isCached(uri) {
     return !!(await _getBundlePath(uri))
   },
   async clear(uri) {
     const path = await _getBundlePath(uri)
-    await _deleteBundle(path)
+    try {
+      await _deleteBundle(path)
+    } catch(e) {}
     await _clearBundlePath(uri)
   },
 }
