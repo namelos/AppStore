@@ -17,25 +17,25 @@ export class AppStore extends React.Component {
   render() {
     return (
       <NativeRouter>
-        <View style={styles.center}>
-          <View>
-            <Link to="/">
+        <View style={styles.container}>
+          <View style={styles.navigation}>
+            <Link style={styles.navigation_link} to="/">
               <Text>Home</Text>
             </Link>
             {
-              this.state.apps.map(({name}) => 
-                <Link to={`/${name}`} key={name}>
+              this.state.apps.map(({name}) =>
+                <Link style={styles.navigation_link} to={`/${name}`} key={name}>
                   <Text>{name}</Text>
                 </Link>
               )
             }
           </View>
 
-          <View>
+          <View style={styles.center}>
             <Route exact path="/" component={Home}/>
             {
               this.state.apps.map(({name, appRoot}) =>
-                <Route path={`/${name}`} component={appRoot} key={name}/> 
+                <Route path={`/${name}`} component={appRoot} key={name}/>
               )
             }
           </View>
@@ -46,9 +46,25 @@ export class AppStore extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  navigation: {
+    width: '100%',
+    flexDirection: 'row',
+    paddingTop: 20,
+  },
+  navigation_link: {
+    flex: 1,
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'whitesmoke',
+    borderRightColor: 'lightgray',
+    borderRightWidth: 1,
+  },
   center: {
-    height: '100%',
-    display: 'flex',
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
   }
